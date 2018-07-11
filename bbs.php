@@ -4,8 +4,8 @@
 
   $dsn = 'mysql:dbname=oneline_bbs;host=localhost';
   $user = 'root';
-  $passward = '';
-  $dbh = new PDO($dsn, $user, $passward);
+  $password = '';
+  $dbh = new PDO($dsn, $user, $password);
   $dbh->query('SET NAMES utf8');
 
   if (!empty($_POST)) {
@@ -27,20 +27,20 @@
   }
 
   $sql = 'SELECT * FROM `posts` ORDER BY created DESC';
-        $stmt = $dbh->prepare($sql);
-        $stmt->execute();
+  $stmt = $dbh->prepare($sql);
+  $stmt->execute();
 
-        $comments = array();
-         while (1) {
-          // データを１件ずつ取得
-              $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-              if ($rec == false) {
-                  break;
-               }
-               // 配列に追加
-              $comments[] = $rec;
+  $comments = array();
+  while (1) {
+  // データを１件ずつ取得
+      $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+      if ($rec == false) {
+         break;
+      }
+   // 配列に追加
+      $comments[] = $rec;
 
-            }
+  }
 
   $dbh = null  
 
